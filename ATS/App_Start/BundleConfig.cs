@@ -23,6 +23,15 @@ namespace ATS
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
+                    "~/Scripts/angular.min.js",
+                    "~/Scripts/angular-route.min.js",
+                    "~/Scripts/angular-cookies.min.js",
+                    "~/Scripts/angular-messages.min.js",
+                    "~/Scripts/common.js",
+                    "~/Scripts/angular-local-storage.js"
+                ));
         }
     }
 }

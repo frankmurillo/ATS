@@ -1,0 +1,37 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron">
+            Registrationsawefawef
+        </div>
+    </div>
+    <div class="row">
+        <form class="form-login" role="form">
+            <h2 class="form-login-heading">SIGN UP HERE</h2>
+            <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" ng-model="registration.email" required autofocus />
+            </div>
+            <div class="form-group">
+
+                <label for="Username">Username</label>
+                <input type="text" class="form-control" id="Username" placeholder="Username" ng-model="registration.Username" required />
+
+                <label for="FirstName">FirstName</label>
+                <input type="text" class="form-control" id="FirstName" placeholder="FirstName" ng-model="registration.FirstName" required />
+
+                <label for="LastName">LastName</label>
+                <input type="text" class="form-control" id="LastName" placeholder="LastName" ng-model="registration.LastName" required />
+
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" ng-model="registration.password" required />
+
+                <label for="confirmPassword">confirmPassword</label>
+                <input type="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm Password" ng-model="registration.confirmPassword" required />
+            </div>
+            <button type="submit" class="btn btn-lg btn-info btn-block" ng-click="register()">Register</button>
+            <div data-ng-hide="message == ''" data-ng-class="(savedSuccessfully) ? 'alert alert-success' : 'alert alert-danger'">
+                {{message}}
+            </div>
+        </form>
+    </div>
+</div>
