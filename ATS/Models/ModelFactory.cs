@@ -10,6 +10,7 @@ namespace ATS.Models
 {
     public class ModelFactory
     {
+        //REPLACE THIS WITH AUTOMAPPER
         private UrlHelper _UrlHelper;
         private ApplicationUserManager _AppUserManager;
 

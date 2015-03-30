@@ -6,6 +6,7 @@ using System.Web;
 
 namespace ATS.Models
 {
+    //THIS IS RETURNED FROM THE FORM, SHOULD BE A VIEW MODEL?
     public class AccountBindingModels
     {
     }

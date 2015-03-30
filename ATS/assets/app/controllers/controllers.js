@@ -44,6 +44,7 @@ angular.module('controllers', [])
                 data: $scope.registration
             }).success(function (response) {
                 console.log(response);
+                startTimer();
             })
         }
 
