@@ -17,6 +17,7 @@ namespace ATS.Controllers
         #region GetUsers
         [Authorize]
         [Route("users")]
+        [HttpGet]
         public IHttpActionResult GetUsers()
         {
             return Ok(this.AppUserManager.Users.ToList().Select(u => this.TheModelFactory.Create(u)));
@@ -26,6 +27,7 @@ namespace ATS.Controllers
         #region GetUser
         [Authorize]
         [Route("user/{id:guid}", Name = "GetUserById")]
+        [HttpGet]
         public async Task<IHttpActionResult> GetUser(string Id)
         {
             var user = await this.AppUserManager.FindByIdAsync(Id);
@@ -43,6 +45,7 @@ namespace ATS.Controllers
         #region GetUserByName
         [Authorize]
         [Route("user/{username}")]
+        [HttpGet]
         public async Task<IHttpActionResult> GetUserByName(string username)
         {
             var user = await this.AppUserManager.FindByNameAsync(username);
@@ -58,12 +61,13 @@ namespace ATS.Controllers
 
         #region CreateUser
         [AllowAnonymous]
-        [Route("create")]
-        public async Task<IHttpActionResult> CreateUser(CreateUserBindingModel createUserModel)
+        [Route("register")]
+        [HttpPost]
+        public async Task<IHttpActionResult> RegisterUser(CreateUserBindingModel createUserModel)
         {
             if (!ModelState.IsValid)
             {
-                //
+                
                 return BadRequest(ModelState);
             }
 
@@ -85,23 +89,29 @@ namespace ATS.Controllers
                 //returns BadRequest with Error Messages
                 return GetErrorResult(addUserResult);
             }
-            //Send Confirmation Email
-            string code = await this.AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+           //else
+            //{
+                //Send Confirmation Email
+                //NEED TO VERIFY ACCOUNT WITH SENDGRID
 
-            var callbackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = user.Id, code = code }));
+                //string code = await this.AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
 
-            await this.AppUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                //var callbackUrl = new Uri(Url.Link("ConfirmEmailRoute", new { userId = user.Id, code = code }));
 
-            Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
+                //await this.AppUserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-            return Created(locationHeader, TheModelFactory.Create(user));
+                //Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
+
+                //return Created(locationHeader, TheModelFactory.Create(user));
+            //}
+            return Ok();
         }
         #endregion
 
         #region ConfirmEmail
         [AllowAnonymous]
-        [HttpGet]
         [Route("ConfirmEmail", Name = "ConfirmEmailRoute")]
+        [HttpGet]
         public async Task<IHttpActionResult> ConfirmEmail(string userId = "", string code = "")
         {
             if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(code))
@@ -126,6 +136,7 @@ namespace ATS.Controllers
         #region ChangePassword
         [Authorize]
         [Route("ChangePassword")]
+        [HttpPost]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -147,6 +158,7 @@ namespace ATS.Controllers
         #region DeleteUser
         [Authorize]
         [Route("user/{id:guid}")]
+        [HttpGet]
         public async Task<IHttpActionResult> DeleteUser(string id)
         {
 

@@ -1,10 +1,13 @@
 ﻿
-<div ng-app="ATS">
-    <div ng-view></div>
+<div data-ng-app="ATS">
+    <div data-ng-view></div>
 </div>
 
-@Scripts.Render("~/assets/app/controllers/controllers.js")
+@Scripts.Render("~/assets/app/controllers/homeController.js")
+@Scripts.Render("~/assets/app/controllers/adminController.js")
 @Scripts.Render("~/assets/app/directives/directives.js")
 @Scripts.Render("~/assets/app/shared/constants/constants.js")
 @Scripts.Render("~/assets/app/shared/services/ajax/authAjax.js")
+@Scripts.Render("~/assets/app/shared/services/interceptor/interceptors.js")
+@Scripts.Render("~/assets/app/shared/services/authService.js")
 @Scripts.Render("~/assets/app/ATS.js")

@@ -177,7 +177,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\app\shared\directives\" />
     <Folder Include="assets\app\shared\filters\" />
-    <Folder Include="assets\app\shared\services\Interceptor\" />
     <Folder Include="assets\img\" />
   </ItemGroup>
   <ItemGroup>
@@ -239,10 +238,14 @@
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="assets\app\ATS.js" />
-    <Content Include="assets\app\controllers\controllers.js" />
+    <Content Include="assets\app\controllers\adminController.js" />
+    <Content Include="assets\app\controllers\homeController.js" />
     <Content Include="assets\app\directives\directives.js" />
     <Content Include="assets\app\shared\constants\constants.js" />
     <Content Include="assets\app\shared\services\ajax\AuthAjax.js" />
+    <Content Include="assets\app\shared\services\authService.js" />
+    <Content Include="assets\app\shared\services\interceptor\interceptors.js" />
+    <Content Include="assets\app\templates\admin.html" />
     <Content Include="assets\app\templates\consultant.html" />
     <Content Include="assets\app\templates\home.html" />
     <Content Include="assets\app\templates\login.html" />
