@@ -65,3 +65,6 @@ C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.Migrations.InitalCreate.resources
 C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.csproj.GenerateResource.Cache
 C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.dll
 C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.pdb
+C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.csprojResolveAssemblyReference.cache
+C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.Migrations.Roles.resources
+C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.Migrations.route.resources

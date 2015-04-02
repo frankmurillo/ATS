@@ -178,6 +178,7 @@
     <Folder Include="assets\app\shared\directives\" />
     <Folder Include="assets\app\shared\filters\" />
     <Folder Include="assets\img\" />
+    <Folder Include="Entities\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -216,20 +217,32 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ApplicationDbContext.cs" />
+    <Compile Include="Infrastructure\ApplicationRoleManager.cs" />
     <Compile Include="Infrastructure\ApplicationUser.cs" />
     <Compile Include="Infrastructure\ApplicationUserManager.cs" />
     <Compile Include="Migrations\201503272126598_InitalCreate.cs" />
     <Compile Include="Migrations\201503272126598_InitalCreate.Designer.cs">
       <DependentUpon>201503272126598_InitalCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504011519379_Roles.cs" />
+    <Compile Include="Migrations\201504011519379_Roles.Designer.cs">
+      <DependentUpon>201504011519379_Roles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504011554585_route.cs" />
+    <Compile Include="Migrations\201504011554585_route.Designer.cs">
+      <DependentUpon>201504011554585_route.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\AudienceModel.cs" />
     <Compile Include="Models\ChangePasswordBindingModel.cs" />
     <Compile Include="Models\ModelFactory.cs" />
+    <Compile Include="Models\RoleBindingModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomJwtFormat.cs" />
     <Compile Include="Providers\CustomOAuthProvider.cs" />
@@ -325,6 +338,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201503272126598_InitalCreate.resx">
       <DependentUpon>201503272126598_InitalCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504011519379_Roles.resx">
+      <DependentUpon>201504011519379_Roles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504011554585_route.resx">
+      <DependentUpon>201504011554585_route.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

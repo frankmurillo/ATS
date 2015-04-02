@@ -38,10 +38,10 @@ namespace ATS.App_Start
 
         private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
-            // Configure the db context and user manager to use a single instance per request
+            // Configure to use a single instance respectively per request
             app.CreatePerOwinContext(ApplicationDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
-
+            app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
             {
                 //For Dev enviroment only (on production should be AllowInsecureHttp = false)

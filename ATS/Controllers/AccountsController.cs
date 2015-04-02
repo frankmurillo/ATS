@@ -14,8 +14,8 @@ namespace ATS.Controllers
     [RoutePrefix("api/accounts")]
     public class AccountsController : BaseApiController
     {
-        #region GetUsers
-        [Authorize]
+        #region GetUsers(ADMIN)
+        [Authorize(Roles = "Admin")]
         [Route("users")]
         [HttpGet]
         public IHttpActionResult GetUsers()
@@ -24,8 +24,8 @@ namespace ATS.Controllers
         }
         #endregion
 
-        #region GetUser
-        [Authorize]
+        #region GetUser(ADMIN)
+        [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}", Name = "GetUserById")]
         [HttpGet]
         public async Task<IHttpActionResult> GetUser(string Id)
@@ -42,8 +42,8 @@ namespace ATS.Controllers
         }
         #endregion
 
-        #region GetUserByName
-        [Authorize]
+        #region GetUserByName (ADMIN)
+        [Authorize(Roles = "Admin")]
         [Route("user/{username}")]
         [HttpGet]
         public async Task<IHttpActionResult> GetUserByName(string username)
@@ -133,7 +133,7 @@ namespace ATS.Controllers
         }
         #endregion
 
-        #region ChangePassword
+        #region ChangePassword (AUTHORIZE*)
         [Authorize]
         [Route("ChangePassword")]
         [HttpPost]
@@ -155,8 +155,8 @@ namespace ATS.Controllers
         }
         #endregion
 
-        #region DeleteUser
-        [Authorize]
+        #region DeleteUser (ADMIN)
+        [Authorize(Roles = "Admin")]
         [Route("user/{id:guid}")]
         [HttpGet]
         public async Task<IHttpActionResult> DeleteUser(string id)
@@ -178,6 +178,51 @@ namespace ATS.Controllers
                 return Ok();
             }
             return NotFound();
+        }
+        #endregion
+
+        #region AssignRolesToUser (ADMIN)
+        [Authorize(Roles = "Admin")]
+        [Route("user/{id:guid}/roles")]
+        [HttpPut]
+        public async Task<IHttpActionResult> AssignRolesToUser([FromUri] string id, [FromBody] string[] rolesToAssign)
+        {
+
+            var appUser = await this.AppUserManager.FindByIdAsync(id);
+            //Check if User exists
+            if (appUser == null)
+            {
+                return NotFound();
+            }
+
+            var currentRoles = await this.AppUserManager.GetRolesAsync(appUser.Id);
+
+            var rolesNotExists = rolesToAssign.Except(this.AppRoleManager.Roles.Select(x => x.Name)).ToArray();
+            //check if rolesToAssign contain valid roles
+            if (rolesNotExists.Count() > 0)
+            {
+
+                ModelState.AddModelError("", string.Format("Roles '{0}' does not exixts in the system", string.Join(",", rolesNotExists)));
+                return BadRequest(ModelState);
+            }
+            //Remove existing User for replacement
+            IdentityResult removeResult = await this.AppUserManager.RemoveFromRolesAsync(appUser.Id, currentRoles.ToArray());
+
+            if (!removeResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Failed to remove user roles");
+                return BadRequest(ModelState);
+            }
+            //Replacing the existing User
+            IdentityResult addResult = await this.AppUserManager.AddToRolesAsync(appUser.Id, rolesToAssign);
+
+            if (!addResult.Succeeded)
+            {
+                ModelState.AddModelError("", "Failed to add user roles");
+                return BadRequest(ModelState);
+            }
+
+            return Ok();
         }
         #endregion
     }

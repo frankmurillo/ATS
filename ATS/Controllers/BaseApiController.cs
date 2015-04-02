@@ -25,10 +25,15 @@ namespace ATS.Controllers
             }
         }
 
-        public BaseApiController()
-        {
-        }
+        private ApplicationRoleManager _AppRoleManager = null;
 
+        protected ApplicationRoleManager AppRoleManager
+        {
+            get
+            {
+                return _AppRoleManager ?? Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
+            }
+        }
         protected ModelFactory TheModelFactory
         {
             get
