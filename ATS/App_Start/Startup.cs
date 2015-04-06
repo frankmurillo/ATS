@@ -1,8 +1,13 @@
 ﻿using ATS.Infrastructure;
 using ATS.Providers;
+using ATS.Service.Google;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.DataHandler.Encoder;
+using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.Jwt;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
@@ -20,6 +25,9 @@ namespace ATS.App_Start
 {
     public class Startup
     {
+        //Social Providers for Web Api Pipeline
+        public static OAuthBearerAuthenticationOptions _OAuthBearerOptions { get; private set; }
+        public static GoogleOAuth2AuthenticationOptions _googleAuthOptions { get; private set; }
 
         public void Configuration(IAppBuilder app)
         {
@@ -27,7 +35,7 @@ namespace ATS.App_Start
 
             ConfigureOAuthTokenGeneration(app);
             ConfigureOAuthTokenConsumption(app);
-
+            ConfigureOAuthExternal(app);
             ConfigureWebApi(httpConfig);
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
@@ -35,7 +43,34 @@ namespace ATS.App_Start
             app.UseWebApi(httpConfig);
 
         }
+        private void ConfigureOAuthExternal(IAppBuilder app)
+        {
+            //user a cookie to temporarily store information about a user logging in with a third party login provider
+            app.UseExternalSignInCookie(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ExternalCookie);
+            _OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
 
+            app.UseCookieAuthentication(new CookieAuthenticationOptions{
+                AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
+                LoginPath = new PathString("/Login"),
+                Provider = new CookieAuthenticationProvider
+                {
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
+                        validateInterval: TimeSpan.FromMinutes(30),
+                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager, "ExternalAccessToken"))
+                }
+            });
+            app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+
+            //Google will be our 3rd party
+            _googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "403744615341-hej6i7qeakd0trpnc02r57rub34qa75k.apps.googleusercontent.com",
+                ClientSecret = "rV9TV4DjrRahLPOlijTQSmQX",
+                Provider = new GoogleAuthProvider()
+            };
+            app.UseGoogleAuthentication(_googleAuthOptions);
+
+        }
         private void ConfigureOAuthTokenGeneration(IAppBuilder app)
         {
             // Configure to use a single instance respectively per request
@@ -55,6 +90,8 @@ namespace ATS.App_Start
 
             // OAuth 2.0 Bearer Access Token Generation
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            //for third party(google)
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
 
         private void ConfigureOAuthTokenConsumption(IAppBuilder app)

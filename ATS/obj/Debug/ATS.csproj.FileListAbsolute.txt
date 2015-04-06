@@ -1,3 +1,8 @@
+C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.Migrations.InitalCreate.resources
+C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.Migrations.Roles.resources
+C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.Migrations.route.resources
+C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.csproj.GenerateResource.Cache
+C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.csprojResolveAssemblyReference.cache
 C:\Users\Burton\Repo\ATS\ATS\bin\ATS.dll.config
 C:\Users\Burton\Repo\ATS\ATS\bin\ATS.dll
 C:\Users\Burton\Repo\ATS\ATS\bin\ATS.pdb
@@ -12,6 +17,7 @@ C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.dll
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.Cookies.dll
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.dll
+C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.Google.dll
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.Jwt.dll
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.OAuth.dll
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Web.Infrastructure.dll
@@ -45,6 +51,7 @@ C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Cors.xml
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Host.SystemWeb.xml
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.xml
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.Jwt.xml
 C:\Users\Burton\Repo\ATS\ATS\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\Burton\Repo\ATS\ATS\bin\Newtonsoft.Json.xml
@@ -61,10 +68,5 @@ C:\Users\Burton\Repo\ATS\ATS\bin\System.Web.WebPages.Deployment.xml
 C:\Users\Burton\Repo\ATS\ATS\bin\System.Web.WebPages.Razor.xml
 C:\Users\Burton\Repo\ATS\ATS\bin\System.Web.Optimization.xml
 C:\Users\Burton\Repo\ATS\ATS\bin\Thinktecture.IdentityModel.Core.pdb
-C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.Migrations.InitalCreate.resources
-C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.csproj.GenerateResource.Cache
 C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.dll
 C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.pdb
-C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.csprojResolveAssemblyReference.cache
-C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.Migrations.Roles.resources
-C:\Users\Burton\Repo\ATS\ATS\obj\Debug\ATS.Migrations.route.resources

@@ -8,15 +8,16 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using ATS.Service.Google;
 
 namespace ATS.Controllers
 {
     public class BaseApiController : ApiController
     {
 
-        private ModelFactory _modelFactory;
+        #region ApplicationUserManager
         private ApplicationUserManager _AppUserManager = null;
-
         protected ApplicationUserManager AppUserManager
         {
             get
@@ -24,7 +25,9 @@ namespace ATS.Controllers
                 return _AppUserManager ?? Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
             }
         }
+        #endregion
 
+        #region ApplicationRoleManager
         private ApplicationRoleManager _AppRoleManager = null;
 
         protected ApplicationRoleManager AppRoleManager
@@ -34,6 +37,10 @@ namespace ATS.Controllers
                 return _AppRoleManager ?? Request.GetOwinContext().GetUserManager<ApplicationRoleManager>();
             }
         }
+        #endregion
+
+        #region ModelFactory
+        private ModelFactory _modelFactory;
         protected ModelFactory TheModelFactory
         {
             get
@@ -45,7 +52,9 @@ namespace ATS.Controllers
                 return _modelFactory;
             }
         }
+        #endregion
 
+        #region GetErrorResult
         protected IHttpActionResult GetErrorResult(IdentityResult result)
         {
             if (result == null)
@@ -74,5 +83,24 @@ namespace ATS.Controllers
 
             return null;
         }
+        #endregion
+
+        #region IAuthenticationManager Authentication
+        protected IAuthenticationManager Authentication
+        {
+            get { return Request.GetOwinContext().Authentication; }
+        }  
+        #endregion
+
+        #region AuthRepository
+        private AuthRepository _authRepository = null;
+        protected AuthRepository AuthRepository
+        {
+            get
+            {
+                return _authRepository ?? new AuthRepository();
+            }
+        }
+        #endregion
     }
 }
